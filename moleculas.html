@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MolGenAI</title>
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="css/moleculas.css" />
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="logo">
+      <img src="images/logo.svg" alt="MolGen.AI" />
+    </div>
+    <p class="guardadas">Moléculas Guardadas</p>
+   <div class="bottom-icons">
+  <div class="bottom-icons">
+  <a href="#"><img src="images/home.svg" alt="Inicio" width="32" /></a>
+  <a href="#"><img src="images/logo.svg" alt="Info" width="32" /></a>
+  <a href="#"><img src="images/pantalla_inicio.svg" alt="Configuración" width="32" /></a>
+</div>
+    </div>
+  </nav>
+
+ <main>
+  <div class="contenedor-input">
+    <h1 class="titulo">Ingrese Moléculas</h1>
+    <input class="moleculas-input" id="moleculas-input" placeholder="Escriba aquí las moléculas..." />
+  </div>
+
+  <div class="div-boton">
+    <button class="btn-generar" id="generar">Generar</button>
+  </div>
+</main>
+<section id="respuesta" class="respuesta"></section> 
+<script type="module" src="moleculas.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+*{
+    margin: 0%; /* le saca los margenes al default que viene del html, para que todo quede pegado a los bordes*/
+    padding: 0%; /* */
+}
+.body{
+    background-image: url("../images/pantalla_inicio.svg");
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+img{
+    height:30vh;
+}
+
+.comenzar {
+  margin-top: 10vh;
+  color: #01DDFF;
+  background-color: transparent;
+  padding: 1.7vw 5vw;
+  border-radius: 5vw;
+  border: 3px solid #01DDFF;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.2rem;
+
+  box-shadow: 0 0 10px rgba(1, 221, 255, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.comenzar:hover {
+  background-color: #01DDFF;
+  color: #0A0F1A;
+  box-shadow: 0 0 20px #01DDFF;
+  transform: scale(1.05);
+}

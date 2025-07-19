@@ -1,0 +1,171 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background-color: #0a0f1a;
+  color: #00e6ff;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 250px;
+  min-width: 200px;
+  background-color: #071c3a;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 90px;
+}
+
+.guardadas {
+    color: #b4e6ff;
+  font-size: 0.9rem;
+  display: flex;
+  justify-self: flex-start;
+}
+
+.bottom-icons {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.bottom-icons img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  background-image: url('../images/pantalla_inicio.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  gap: 30px;
+}
+
+/* Estilo visual brillante para el contenedor de input */
+.contenedor-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  padding-left: 20px;
+}
+
+.titulo {
+  font-size: 1.8rem;
+  color: #00e6ff;
+  text-shadow: 0 0 12px #00e6ff;
+  margin-bottom: 15px;
+  z-index: 1;
+}
+
+.moleculas-input {
+  width: 100%;
+  height: 250px;
+  background-color: #08182f;
+  border: 2px solid #00e6ff;
+  border-radius: 25px;
+  padding: 20px;
+  color: #00e6ff;
+  font-size: 1rem;
+  box-shadow: 0 0 20px #00e6ff88;
+  z-index: 1;
+  outline: none;
+}
+
+/* Centrado absoluto del botón */
+.div-boton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.btn-generar {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: 2px solid #00e6ff;
+  border-radius: 30px;
+  background-color: transparent;
+  color: #00e6ff;
+  box-shadow: 0 0 12px #00e6ff;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.btn-generar:hover {
+  cursor: pointer;
+  background-color: #00e6ff;
+  color: #0a0f1a;
+  box-shadow: 0 0 25px #00e6ff;
+  transform: scale(1.05);
+}
+@media (max-width: 768px) {
+  .sidebar {
+    width: 80px;
+    padding: 10px 0;
+  }
+
+  .logo img {
+    height: 50px;
+  }
+
+  .brand, .guardadas {
+    display: none;
+  }
+
+  .titulo {
+    font-size: 1.5rem;
+  }
+
+  .moleculas-input {
+    height: 200px;
+  }
+
+  .btn-generar {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+  .respuesta {
+  margin-top: 30px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #f4f4f4;
+  font-family: sans-serif;
+}
+
+}
