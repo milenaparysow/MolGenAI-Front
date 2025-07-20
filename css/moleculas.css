@@ -133,17 +133,20 @@ main {
   box-shadow: 0 0 25px #00e6ff;
   transform: scale(1.05);
 }
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   body {
     flex-direction: column;
-    overflow: auto;
+    overflow-y: auto;
   }
 
   .sidebar {
     width: 100%;
+    height: auto;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
+    gap: 10px;
   }
 
   .logo {
@@ -157,30 +160,33 @@ main {
   }
 
   .guardadas {
-    font-size: 0.8rem;
-    color: #b4e6ff;
     display: block;
+    font-size: 0.9rem;
+    margin-left: auto;
+    color: #b4e6ff;
   }
 
   main {
     width: 100%;
     padding: 20px;
     align-items: center;
+    background-size: contain;
   }
 
   .contenedor-input {
     width: 100%;
-    padding-left: 0;
+    padding: 0;
     align-items: center;
   }
 
   .titulo {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     text-align: center;
   }
 
   .moleculas-input {
     height: 180px;
+    width: 100%;
     font-size: 1rem;
   }
 
