@@ -134,38 +134,65 @@ main {
   transform: scale(1.05);
 }
 @media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    overflow: auto;
+  }
+
   .sidebar {
-    width: 80px;
-    padding: 10px 0;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+
+  .logo {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
   }
 
   .logo img {
-    height: 50px;
+    height: 40px;
   }
 
-  .brand, .guardadas {
-    display: none;
+  .guardadas {
+    font-size: 0.8rem;
+    color: #b4e6ff;
+    display: block;
+  }
+
+  main {
+    width: 100%;
+    padding: 20px;
+    align-items: center;
+  }
+
+  .contenedor-input {
+    width: 100%;
+    padding-left: 0;
+    align-items: center;
   }
 
   .titulo {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    text-align: center;
   }
 
   .moleculas-input {
-    height: 200px;
+    height: 180px;
+    font-size: 1rem;
   }
 
   .btn-generar {
     padding: 12px 30px;
     font-size: 1rem;
   }
-  .respuesta {
-  margin-top: 30px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  background-color: #f4f4f4;
-  font-family: sans-serif;
-}
 
+  .respuesta {
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 0.9rem;
+    width: 100%;
+  }
 }
