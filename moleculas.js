@@ -4,44 +4,34 @@ const respuestaDiv = document.getElementById("respuesta");
 
 boton.addEventListener("click", async () => {
   const smiles = input.value.trim();
-
   if (!smiles) {
     respuestaDiv.innerHTML = `<p style="color:red;">Por favor, ingresá un SMILES válido.</p>`;
     return;
   }
 
   try {
-    // Ahora pedimos al backend que hable con la IA y guarde la molécula
-    const response = await fetch("http://localhost:3000/suggest-raw?save=true", {
+    const resp = await fetch("http://localhost:3000/mutar", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ smiles }), // mandamos solo el smiles
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ smiles })
     });
 
-    const json = await response.json();
-    console.log("Respuesta completa del backend:", JSON.stringify(json, null, 2));
-
+    const json = await resp.json();
     if (!json.ok) {
       respuestaDiv.innerHTML = `<div class="alerta error">⚠️ Error del backend: ${json.mensaje || "desconocido"}</div>`;
       return;
     }
 
-    const molecula = json.data;
-
+    const nuevo = json.data?.smiles || "(sin dato)";
     respuestaDiv.innerHTML = `
       <div class="alerta exito">
-        <h3>✅ Molécula generada correctamente</h3>
-        <p><strong>SMILES:</strong> ${molecula.smiles}</p>
-        <p><strong>Peso molecular:</strong> ${molecula.peso_molecular}</p>
-        <p><strong>Predicción bioactiva:</strong> ${molecula.prediccion_bioactiva}</p>
-        <p><strong>Lipinski OK:</strong> ${molecula.lipinski_ok}</p>
-        <p><strong>Toxicidad potencial:</strong> ${molecula.toxicidad_potencial}</p>
+        <h3>✅ Molécula generada</h3>
+        <p><strong>SMILES original:</strong> ${smiles}</p>
+        <p><strong>SMILES nuevo:</strong> ${nuevo}</p>
       </div>
     `;
-  } catch (error) {
-    console.error("Error real:", error);
+  } catch (e) {
+    console.error(e);
     respuestaDiv.innerHTML = `<div class="alerta error">❌ Ocurrió un error al conectar con el backend.</div>`;
   }
 });
