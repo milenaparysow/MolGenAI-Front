@@ -10,21 +10,14 @@ boton.addEventListener("click", async () => {
     return;
   }
 
-  const nuevaMolecula = {
-    lipinski_ok: true,
-    peso_molecular: 3213.31231,
-    prediccion_bioactiva: 3,
-    smiles: smiles,
-    toxicidad_potencial: "Alta"
-  };
-
   try {
-    const response = await fetch("https://proyecto-25-4ecu.vercel.app/create", {
+    // Ahora pedimos al backend que hable con la IA y guarde la molécula
+    const response = await fetch("http://localhost:3000/suggest-raw?save=true", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(nuevaMolecula),
+      body: JSON.stringify({ smiles }), // mandamos solo el smiles
     });
 
     const json = await response.json();
@@ -39,9 +32,12 @@ boton.addEventListener("click", async () => {
 
     respuestaDiv.innerHTML = `
       <div class="alerta exito">
-        <h3>✅ Molécula enviada correctamente</h3>
-        <p><strong>ID:</strong> ${molecula.id || "sin ID"}</p>
-        <p><strong>SMILES:</strong> ${molecula.smiles || "no devuelto"}</p>
+        <h3>✅ Molécula generada correctamente</h3>
+        <p><strong>SMILES:</strong> ${molecula.smiles}</p>
+        <p><strong>Peso molecular:</strong> ${molecula.peso_molecular}</p>
+        <p><strong>Predicción bioactiva:</strong> ${molecula.prediccion_bioactiva}</p>
+        <p><strong>Lipinski OK:</strong> ${molecula.lipinski_ok}</p>
+        <p><strong>Toxicidad potencial:</strong> ${molecula.toxicidad_potencial}</p>
       </div>
     `;
   } catch (error) {
