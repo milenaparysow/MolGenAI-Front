@@ -10,7 +10,8 @@ boton.addEventListener("click", async () => {
   }
 
   try {
-    const resp = await fetch("http://localhost:3000/mutar", {
+    // 👇 Ahora apunta a tu función serverless en Vercel
+    const resp = await fetch("/api/mutar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ smiles })
@@ -22,21 +23,20 @@ boton.addEventListener("click", async () => {
       return;
     }
 
-    // Extraemos todos los valores del backend
-    const nuevo = json.data?.smiles ?? "(sin dato)";
-    const peso = json.data?.peso_molecular ?? "(?)";
-    const bio = json.data?.prediccion_bioactiva ?? "(?)";
-    const lip = json.data?.lipinski_ok ? "sí" : "no";
-    const tox = json.data?.toxicidad_potencial ?? "(?)";
+    const data = json.data || {};
+    const nuevo = data.smiles || "(sin dato)";
+    const peso = data.peso_molecular ?? "(?)";
+    const bio = data.prediccion_bioactiva ?? "(?)";
+    const lip = data.lipinski_ok ? "sí" : "no";
+    const tox = data.toxicidad_potencial ?? "(?)";
 
-    // Mostramos todo en pantalla
     respuestaDiv.innerHTML = `
       <div class="alerta exito">
         <h3>✅ Molécula generada</h3>
         <p><strong>SMILES original:</strong> ${smiles}</p>
-      <p><strong>SMILES nuevo:</strong> ${nuevo}</p>
-      <p><strong>Peso molecular:</strong> ${peso}</p>
-       <p><strong>Predicción bioactiva:</strong> ${bio}</p>
+        <p><strong>SMILES nuevo:</strong> ${nuevo}</p>
+        <p><strong>Peso molecular:</strong> ${peso}</p>
+        <p><strong>Predicción bioactiva:</strong> ${bio}</p>
         <p><strong>Lipinski OK:</strong> ${lip}</p>
         <p><strong>Toxicidad potencial:</strong> ${tox}</p>
       </div>
