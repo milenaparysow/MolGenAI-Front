@@ -22,12 +22,23 @@ boton.addEventListener("click", async () => {
       return;
     }
 
-    const nuevo = json.data?.smiles || "(sin dato)";
+    // Extraemos todos los valores del backend
+    const nuevo = json.data?.smiles ?? "(sin dato)";
+    const peso = json.data?.peso_molecular ?? "(?)";
+    const bio = json.data?.prediccion_bioactiva ?? "(?)";
+    const lip = json.data?.lipinski_ok ? "sí" : "no";
+    const tox = json.data?.toxicidad_potencial ?? "(?)";
+
+    // Mostramos todo en pantalla
     respuestaDiv.innerHTML = `
       <div class="alerta exito">
         <h3>✅ Molécula generada</h3>
         <p><strong>SMILES original:</strong> ${smiles}</p>
-        <p><strong>SMILES nuevo:</strong> ${nuevo}</p>
+      <p><strong>SMILES nuevo:</strong> ${nuevo}</p>
+      <p><strong>Peso molecular:</strong> ${peso}</p>
+       <p><strong>Predicción bioactiva:</strong> ${bio}</p>
+        <p><strong>Lipinski OK:</strong> ${lip}</p>
+        <p><strong>Toxicidad potencial:</strong> ${tox}</p>
       </div>
     `;
   } catch (e) {
