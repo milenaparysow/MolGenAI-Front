@@ -1,36 +1,44 @@
-*{
-    margin: 0%; /* le saca los margenes al default que viene del html, para que todo quede pegado a los bordes*/
-    padding: 0%; /* */
-}
-.body{
-    background-image: url("../images/pantalla_inicio.svg");
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-img{
-    height:30vh;
+/* HERO (tu pantalla inicial con el SVG) */
+.body {
+  background-image: url("../images/pantalla_inicio.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100svh; /* más robusto que 100vh en móviles */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
+/* Solo el logo del hero, no todas las imágenes del sitio */
+.body img {
+  height: 30vh;
+  max-width: 80vw;
+  object-fit: contain;
+}
+
+/* Botón Comenzar (tu estilo original) */
 .comenzar {
   margin-top: 10vh;
-  color: #01DDFF;
+  color: #01ddff;
   background-color: transparent;
   padding: 1.7vw 5vw;
   border-radius: 5vw;
-  border: 3px solid #01DDFF;
+  border: 3px solid #01ddff;
   font-family: "Inter", sans-serif;
   font-weight: 900;
-  font-style: normal;
   text-decoration: none;
   text-align: center;
   font-size: 1.2rem;
-
   box-shadow: 0 0 10px rgba(1, 221, 255, 0.5);
   transition: all 0.3s ease;
   cursor: pointer;
@@ -38,8 +46,61 @@ img{
 }
 
 .comenzar:hover {
-  background-color: #01DDFF;
-  color: #0A0F1A;
-  box-shadow: 0 0 20px #01DDFF;
+  background-color: #01ddff;
+  color: #0a0f1a;
+  box-shadow: 0 0 20px #01ddff;
   transform: scale(1.05);
+}
+
+/* --- Sección informativa (la de “¿Qué es MolGenAI?”) --- */
+.landing-info {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: #ffffff;
+}
+
+.landing-info .container {
+  max-width: 900px;
+  text-align: center;
+}
+
+.landing-info h2 {
+  font-size: clamp(22px, 4vw, 32px);
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+/* Corrige <strong> que parecían enlaces */
+.landing-info p {
+  font-size: clamp(16px, 2.2vw, 18px);
+  line-height: 1.7;
+  color: #334155;
+}
+
+.landing-info p strong,
+.landing-info p b {
+  color: #1971ff !important;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+/* Si algún día hay links reales en la sección */
+.landing-info a {
+  color: #1971ff;
+  text-decoration: underline;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .comenzar {
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-size: 1rem;
+  }
+  .body img {
+    height: 22vh;
+  }
 }

@@ -1,28 +1,266 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MolGenAI</title>
-<link rel="icon" href="images/favicon.png" type="image/png">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/home.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MolGenAI</title>
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+
+  <!-- Tipografía -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: url("./images/pantalla_inicio.svg") center/cover no-repeat fixed;
+      color: #F8FAFC;
+    }
+
+    /* ===== HERO ===== */
+    .body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+    .body img {
+      height: 30vh;
+      max-width: 80vw;
+      object-fit: contain;
+    }
+
+    /* ===== BOTÓN ===== */
+    .comenzar {
+      margin-top: 5vh;
+      color: #01DDFF;
+      background-color: transparent;
+      padding: 1.2rem 3rem;
+      border-radius: 50px;
+      border: 3px solid #01DDFF;
+      font-weight: 900;
+      text-decoration: none;
+      font-size: 1.2rem;
+      box-shadow: 0 0 10px rgba(1, 221, 255, 0.5);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .comenzar:hover {
+      background-color: #01DDFF;
+      color: #0A0F1A;
+      box-shadow: 0 0 20px #01DDFF;
+      transform: scale(1.05);
+    }
+
+    /* ===== SCROLL HINT ===== */
+    .scroll-hint {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #94A3B8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      opacity: 0.9;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .arrow {
+      font-size: 1.2rem;
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 0.9; transform: translateY(0); }
+    }
+
+    /* ===== SECCIÓN INFO ===== */
+    .landing-info {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: clamp(56px, 8vw, 96px) 24px;
+      text-align: center;
+    }
+    .landing-info .card {
+      background: rgba(10, 15, 26, 0.75);
+      border: 2px solid #01DDFF;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 960px;
+      box-shadow: 0 8px 25px rgba(1, 221, 255, 0.3);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .landing-info h2 {
+      font-size: clamp(28px, 5vw, 44px);
+      margin-bottom: 16px;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+    .landing-info p {
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.8;
+      color: #E2E8F0;
+    }
+    .landing-info strong {
+      color: #01DDFF;
+      font-weight: 800;
+    }
+
+    /* ===== SECCIÓN EQUIPO ===== */
+    .team {
+      min-height: 100vh;
+      padding: clamp(56px, 8vw, 96px) 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .team h2 {
+      font-size: clamp(28px, 5vw, 44px);
+      margin-bottom: 48px;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+      width: 100%;
+      max-width: 1000px;
+    }
+    .member {
+      background: rgba(10, 15, 26, 0.75);
+      border: 2px solid #01DDFF;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 6px 20px rgba(1, 221, 255, 0.25);
+      backdrop-filter: blur(6px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .member:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(1, 221, 255, 0.35);
+    }
+    .member h3 {
+      margin-bottom: 8px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #01DDFF;
+    }
+    .member p {
+      margin: 0;
+      font-size: 16px;
+      color: #E2E8F0;
+    }
+
+    /* ===== LINKEDIN ICON ===== */
+    .linkedin {
+      margin-top: 12px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .linkedin:hover {
+      transform: scale(1.2);
+    }
+    .linkedin svg {
+      width: 28px;
+      height: 28px;
+      fill: #01DDFF;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(10, 15, 26, 0.9);
+      color: #94A3B8;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(1, 221, 255, 0.2);
+    }
+    footer strong {
+      color: #01DDFF;
+    }
+  </style>
 </head>
 <body>
-    <style>
+  <!-- HERO -->
+  <div class="body">
+    <img src="./images/logo.svg" alt="MolGenAI logo">
+    <a href="#about" class="comenzar">Comenzar</a>
+    <div class="scroll-hint">
+      <span>Scrolleá para ver más</span>
+      <div class="arrow">⬇</div>
+    </div>
+  </div>
 
+  <!-- INFO -->
+  <section class="landing-info" id="about">
+    <div class="card">
+      <h2>¿Qué es <strong>MolGenAI</strong>?</h2>
+      <p>
+        <strong>MolGenAI</strong> es una inteligencia artificial generativa que diseña y propone
+        <strong>nuevas moléculas</strong> con potencial farmacológico. Integra química computacional e IA
+        para explorar el espacio químico de forma eficiente y priorizar compuestos con mejores propiedades.
+        En tu flujo actual se consideran criterios como la <strong>regla de Lipinski</strong>, el
+        <strong>peso molecular</strong>, la <strong>predicción de bioactividad</strong> y la
+        <strong>toxicidad potencial</strong>, acelerando la etapa de descubrimiento — empezando por
+        candidatos <strong>antidiabéticos</strong>. Nuestro objetivo: diseño de fármacos más
+        <strong>rápido, accesible y sostenible</strong>.
+      </p>
+    </div>
+  </section>
 
+  <!-- TEAM -->
+  <section class="team" id="team">
+    <h2>Conocé al equipo</h2>
+    <div class="team-grid">
+      <div class="member">
+        <h3>Milen Parysow</h3>
+        <p>Front End</p>
+        <a href="https://www.linkedin.com/in/milena-parysow-4bab332b7" target="_blank" class="linkedin" aria-label="LinkedIn Milen">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
+        </a>
+      </div>
+      <div class="member">
+        <h3>Valentín Spierer</h3>
+        <p>UX / UI</p>
+        <a href="https://www.linkedin.com/in/valent%C3%ADn-spierer/" target="_blank" class="linkedin" aria-label="LinkedIn Valentín">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
+        </a>
+      </div>
+      <div class="member">
+        <h3>André Michanie</h3>
+        <p>Inteligencia Artificial</p>
+        <a href="https://www.linkedin.com/in/andre-michanie-363a21358/" target="_blank" class="linkedin" aria-label="LinkedIn André">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
+        </a>
+      </div>
+      <div class="member">
+        <h3>Rocío Casares</h3>
+        <p>Back End</p>
+        <a href="https://www.linkedin.com/in/rocio-casares-8527a0371/" target="_blank" class="linkedin" aria-label="LinkedIn Rocío">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
-    </style>
-    <div class="body">
-        <img src="./images/logo.svg" alt="Logo">
-        <a href="moleculas.html" target="_blank" rel="noopener noreferrer" class="comenzar">Comenzar</a>
-
-</div>
-    <script src="scripts.js" type="module"></script>
+  <!-- FOOTER -->
+  <footer>
+    © <strong>MolGenAI</strong> 2025 – Marca Registrada
+  </footer>
 </body>
 </html>
