@@ -7,260 +7,249 @@
   <title>MolGenAI</title>
   <link rel="icon" href="images/favicon.png" type="image/png" />
 
-  <!-- Tipografía -->
+  <!-- tipografía -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --brand: #01DDFF;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --panel: rgba(10, 15, 26, 0.75);
+      --shadow: rgba(1, 221, 255, 0.3);
+      --border: 2px solid var(--brand);
+    }
+
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: "Inter", sans-serif;
+      color: var(--text);
       background: url("./images/pantalla_inicio.svg") center/cover no-repeat fixed;
-      color: #F8FAFC;
     }
 
-    /* ===== HERO ===== */
-    .body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-    }
-    .body img {
-      height: 30vh;
-      max-width: 80vw;
-      object-fit: contain;
-    }
+    /* layout secciones */
+    section, .body { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: clamp(48px, 8vw, 96px) 24px; text-align: center; }
+    .container { width: 100%; max-width: 1000px; margin: 0 auto; }
 
-    /* ===== BOTÓN ===== */
+    /* hero */
+    .body { flex-direction: column; }
+    .body img { height: 30vh; max-width: 80vw; object-fit: contain; }
     .comenzar {
       margin-top: 5vh;
-      color: #01DDFF;
-      background-color: transparent;
+      color: var(--brand);
+      background: transparent;
       padding: 1.2rem 3rem;
       border-radius: 50px;
-      border: 3px solid #01DDFF;
+      border: 3px solid var(--brand);
       font-weight: 900;
       text-decoration: none;
       font-size: 1.2rem;
       box-shadow: 0 0 10px rgba(1, 221, 255, 0.5);
       transition: all 0.3s ease;
-      cursor: pointer;
       display: inline-block;
     }
-    .comenzar:hover {
-      background-color: #01DDFF;
-      color: #0A0F1A;
-      box-shadow: 0 0 20px #01DDFF;
-      transform: scale(1.05);
-    }
+    .comenzar:hover { background: var(--brand); color: #0A0F1A; box-shadow: 0 0 20px var(--brand); transform: scale(1.05); }
 
-    /* ===== SCROLL HINT ===== */
-    .scroll-hint {
-      margin-top: 2rem;
-      font-size: 0.95rem;
-      color: #94A3B8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-      opacity: 0.9;
-      animation: fadeIn 2s ease-in-out;
-    }
-    .arrow {
-      font-size: 1.2rem;
-      animation: bounce 1.5s infinite;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 0.9; transform: translateY(0); }
-    }
+    .scroll-hint { margin-top: 2rem; font-size: .95rem; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: .3rem; opacity: .9; animation: fadeIn 2s ease-in-out; }
+    .arrow { font-size: 1.2rem; animation: bounce 1.5s infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(10px)} to{opacity:.9; transform:translateY(0)} }
 
-    /* ===== SECCIÓN INFO ===== */
-    .landing-info {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: clamp(56px, 8vw, 96px) 24px;
-      text-align: center;
-    }
-    .landing-info .card {
-      background: rgba(10, 15, 26, 0.75);
-      border: 2px solid #01DDFF;
+    /* card base (glass) */
+    .card {
+      background: var(--panel);
+      border: var(--border);
       border-radius: 20px;
-      padding: 40px;
-      max-width: 960px;
-      box-shadow: 0 8px 25px rgba(1, 221, 255, 0.3);
+      padding: clamp(24px, 4vw, 40px);
+      box-shadow: 0 8px 25px var(--shadow);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-    }
-    .landing-info h2 {
-      font-size: clamp(28px, 5vw, 44px);
-      margin-bottom: 16px;
-      font-weight: 800;
-      color: #FFFFFF;
-    }
-    .landing-info p {
-      font-size: clamp(16px, 2vw, 20px);
-      line-height: 1.8;
-      color: #E2E8F0;
-    }
-    .landing-info strong {
-      color: #01DDFF;
-      font-weight: 800;
+      margin: 0 auto;
     }
 
-    /* ===== SECCIÓN EQUIPO ===== */
-    .team {
-      min-height: 100vh;
-      padding: clamp(56px, 8vw, 96px) 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .team h2 {
-      font-size: clamp(28px, 5vw, 44px);
-      margin-bottom: 48px;
-      font-weight: 800;
-      color: #FFFFFF;
-    }
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 32px;
-      width: 100%;
-      max-width: 1000px;
-    }
-    .member {
-      background: rgba(10, 15, 26, 0.75);
-      border: 2px solid #01DDFF;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 6px 20px rgba(1, 221, 255, 0.25);
-      backdrop-filter: blur(6px);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .member:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(1, 221, 255, 0.35);
-    }
-    .member h3 {
-      margin-bottom: 8px;
-      font-size: 20px;
-      font-weight: 700;
-      color: #01DDFF;
-    }
-    .member p {
-      margin: 0;
-      font-size: 16px;
-      color: #E2E8F0;
-    }
+    h2 { font-size: clamp(28px, 5vw, 44px); margin: 0 0 16px; font-weight: 800; }
+    p  { font-size: clamp(16px, 2vw, 20px); line-height: 1.8; color: #E2E8F0; margin: 0; }
+    strong { color: var(--brand); font-weight: 800; }
 
-    /* ===== LINKEDIN ICON ===== */
-    .linkedin {
-      margin-top: 12px;
-      display: inline-block;
-      transition: transform 0.3s ease;
-    }
-    .linkedin:hover {
-      transform: scale(1.2);
-    }
-    .linkedin svg {
-      width: 28px;
-      height: 28px;
-      fill: #01DDFF;
-    }
+    /* sección: qué es */
+    .landing-info .card { max-width: 960px; }
 
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: rgba(10, 15, 26, 0.9);
-      color: #94A3B8;
-      font-size: 0.9rem;
-      border-top: 1px solid rgba(1, 221, 255, 0.2);
+    /* sección: equipo */
+    .team h2 { margin-bottom: 32px; }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
+    .member { padding: 24px; border-radius: 16px; background: var(--panel); border: var(--border); box-shadow: 0 6px 20px rgba(1,221,255,.25); backdrop-filter: blur(6px); transition: transform .3s ease, box-shadow .3s ease; }
+    .member:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(1,221,255,.35); }
+    .member h3 { margin: 0 0 8px; font-size: 20px; font-weight: 700; color: var(--brand); }
+    .member p { margin: 0; font-size: 16px; }
+    .linkedin { margin-top: 12px; display: inline-block; transition: transform .3s ease; }
+    .linkedin:hover { transform: scale(1.2); }
+    .linkedin svg { width: 28px; height: 28px; fill: #0A66C2; }
+
+    /* sección: impacto */
+    .impact .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 16px; }
+    .impact .feature { padding: 24px; border-radius: 16px; background: var(--panel); border: var(--border); box-shadow: 0 6px 20px rgba(1,221,255,.25); }
+    .feature h3 { margin: 12px 0 8px; font-size: 18px; color: var(--brand); }
+    .feature p  { font-size: 15px; line-height: 1.7; color: #DEE6EE; }
+    .emoji { font-size: 28px; }
+
+    /* sección: contacto */
+    .contact .card { max-width: 900px; }
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    form .full { grid-column: 1 / -1; }
+    input, textarea {
+      width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.06); color: #fff; font-size: 16px; outline: none;
     }
-    footer strong {
-      color: #01DDFF;
+    textarea { min-height: 120px; resize: vertical; }
+    .send {
+      justify-self: center; margin-top: 8px; padding: 12px 28px; border-radius: 999px; border: 2px solid var(--brand);
+      background: transparent; color: var(--brand); font-weight: 800; cursor: pointer; transition: all .2s ease;
+      box-shadow: 0 0 10px rgba(1,221,255,.3);
+    }
+    .send:hover { background: var(--brand); color: #0A0F1A; box-shadow: 0 0 18px var(--brand); }
+    .contact-links { margin-top: 16px; font-size: 14px; color: var(--muted); }
+    .contact-links a { color: var(--brand); text-decoration: underline; }
+
+    /* footer */
+    footer { text-align: center; padding: 20px; background: rgba(10, 15, 26, 0.9); color: var(--muted); font-size: 0.9rem; border-top: 1px solid rgba(1, 221, 255, 0.2); }
+    footer strong { color: var(--brand); }
+
+    /* responsive */
+    @media (max-width: 720px) {
+      form { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <!-- HERO -->
-  <div class="body">
+
+  <!-- hero -->
+  <div class="body" id="home">
     <img src="./images/logo.svg" alt="MolGenAI logo">
-    <a href="#about" class="comenzar">Comenzar</a>
+    <!-- abre la página de generación de moléculas -->
+    <a href="moleculas.html" class="comenzar">Comenzar</a>
     <div class="scroll-hint">
       <span>Scrolleá para ver más</span>
       <div class="arrow">⬇</div>
     </div>
   </div>
 
-  <!-- INFO -->
+  <!-- qué es molgenai -->
   <section class="landing-info" id="about">
-    <div class="card">
-      <h2>¿Qué es <strong>MolGenAI</strong>?</h2>
-      <p>
-        <strong>MolGenAI</strong> es una inteligencia artificial generativa que diseña y propone
-        <strong>nuevas moléculas</strong> con potencial farmacológico. Integra química computacional e IA
-        para explorar el espacio químico de forma eficiente y priorizar compuestos con mejores propiedades.
-        En tu flujo actual se consideran criterios como la <strong>regla de Lipinski</strong>, el
-        <strong>peso molecular</strong>, la <strong>predicción de bioactividad</strong> y la
-        <strong>toxicidad potencial</strong>, acelerando la etapa de descubrimiento — empezando por
-        candidatos <strong>antidiabéticos</strong>. Nuestro objetivo: diseño de fármacos más
-        <strong>rápido, accesible y sostenible</strong>.
-      </p>
+    <div class="container">
+      <div class="card">
+        <h2>¿Qué es <strong>MolGenAI</strong>?</h2>
+        <p>
+          <strong>MolGenAI</strong> es una inteligencia artificial que, a partir de moléculas ya existentes, 
+          genera 
+          <strong>nuevas moléculas</strong> con mejores características farmacológicas. 
+          Se consideran criterios como la <strong>regla de Lipinski</strong>, el
+          <strong>peso molecular</strong>, la <strong>predicción de bioactividad</strong> y la
+          <strong>toxicidad potencial</strong>, acelerando la etapa de descubrimiento. 
+          Nuestro objetivo: diseño de fármacos más
+          <strong>rápido, accesible y sostenible</strong>.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- TEAM -->
+  <!-- equipo -->
   <section class="team" id="team">
-    <h2>Conocé al equipo</h2>
-    <div class="team-grid">
-      <div class="member">
-        <h3>Milen Parysow</h3>
-        <p>Front End</p>
-        <a href="https://www.linkedin.com/in/milena-parysow-4bab332b7" target="_blank" class="linkedin" aria-label="LinkedIn Milen">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
-        </a>
-      </div>
-      <div class="member">
-        <h3>Valentín Spierer</h3>
-        <p>UX / UI</p>
-        <a href="https://www.linkedin.com/in/valent%C3%ADn-spierer/" target="_blank" class="linkedin" aria-label="LinkedIn Valentín">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
-        </a>
-      </div>
-      <div class="member">
-        <h3>André Michanie</h3>
-        <p>Inteligencia Artificial</p>
-        <a href="https://www.linkedin.com/in/andre-michanie-363a21358/" target="_blank" class="linkedin" aria-label="LinkedIn André">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
-        </a>
-      </div>
-      <div class="member">
-        <h3>Rocío Casares</h3>
-        <p>Back End</p>
-        <a href="https://www.linkedin.com/in/rocio-casares-8527a0371/" target="_blank" class="linkedin" aria-label="LinkedIn Rocío">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
-        </a>
+    <div class="container">
+      <h2>Conocé al equipo</h2>
+      <div class="team-grid">
+        <div class="member">
+          <h3>Milena Parysow</h3>
+          <p>Front End</p>
+          <a href="https://www.linkedin.com/in/milena-parysow-4bab332b7" target="_blank" class="linkedin" aria-label="linkedin milen">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
+          </a>
+        </div>
+        <div class="member">
+          <h3>Valentín Spierer</h3>
+          <p>UX / UI</p>
+          <a href="https://www.linkedin.com/in/valent%C3%ADn-spierer/" target="_blank" class="linkedin" aria-label="linkedin valentín">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
+          </a>
+        </div>
+        <div class="member">
+          <h3>André Michanie</h3>
+          <p>Inteligencia Artificial</p>
+          <a href="https://www.linkedin.com/in/andre-michanie-363a21358/" target="_blank" class="linkedin" aria-label="linkedin andré">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
+          </a>
+        </div>
+        <div class="member">
+          <h3>Rocío Casares</h3>
+          <p>Back End</p>
+          <a href="https://www.linkedin.com/in/rocio-casares-8527a0371/" target="_blank" class="linkedin" aria-label="linkedin roció">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8 0 24.1 24.1 0 53.79 0c29.3 0 53.8 24.1 53.8 53.8 0 29.7-24.5 54.3-53.8 54.3zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.8 31.3-2.3 5.5-2.9 13.2-2.9 20.9V448h-92.5s1.2-269.4 0-297.1h92.5v42.1c12.3-19 34.4-46.2 83.7-46.2 61.1 0 107 39.8 107 125.2V448z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- impacto / beneficios -->
+  <section class="impact" id="impact">
+    <div class="container">
+      <div class="card">
+        <h2>¿Por qué <strong>MolGenAI</strong>?</h2>
+        <div class="grid">
+          <div class="feature">
+            <h3>Más rápido</h3>
+            <p>Genera moléculas en segundos para acelerar el desarrollo de nuevos fármacos.</p>
+          </div>
+          <div class="feature">
+            <h3>Más accesible</h3>
+            <p>Reduce costos de investigación.</p>
+          </div>
+          <div class="feature">
+            <h3>Más sostenible</h3>
+            <p>Menor huella ambiental en etapas tempranas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- contacto / cta -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="card">
+        <h2>Conectemos</h2>
+        <p>¿Te interesa colaborar, testear o apoyar el proyecto? Escribinos.</p>
+
+        <!-- formulario: sin superposición (forzado a flex) -->
+        <form class="contact-form"
+              action="mailto:molgenai@gmail.com"
+              method="post"
+              enctype="text/plain"
+              style="display:flex; flex-direction:column; gap:16px;">
+          <div class="row" style="display:flex; gap:16px; flex-wrap:wrap;">
+            <input type="text" name="nombre" placeholder="Nombre" required style="flex:1 1 260px; min-width:0;">
+            <input type="email" name="email" placeholder="Email" required style="flex:1 1 260px; min-width:0;">
+          </div>
+
+          <textarea name="mensaje" placeholder="Tu mensaje..." required></textarea>
+          <button type="submit" class="send">Enviar mensaje</button>
+        </form>
+
+        <div class="contact-links">
+          También podés escribirnos a
+          <a href="mailto:molgenai@gmail.com">molgenai@gmail.com</a>
+          o conocer más en <a href="#about">¿Qué es MolGenAI?</a>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
   <footer>
     © <strong>MolGenAI</strong> 2025 – Marca Registrada
   </footer>
+
 </body>
 </html>
