@@ -5,28 +5,25 @@
   box-sizing: border-box;
 }
 
-/* HERO (tu pantalla inicial con el SVG) */
 .body {
   background-image: url("../images/pantalla_inicio.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  min-height: 100svh; /* más robusto que 100vh en móviles */
+  min-height: 100svh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-/* Solo el logo del hero, no todas las imágenes del sitio */
 .body img {
   height: 30vh;
   max-width: 80vw;
   object-fit: contain;
 }
 
-/* Botón Comenzar (tu estilo original) */
 .comenzar {
   margin-top: 10vh;
   color: #01ddff;
@@ -52,7 +49,6 @@
   transform: scale(1.05);
 }
 
-/* --- Sección informativa (la de “¿Qué es MolGenAI?”) --- */
 .landing-info {
   min-height: 100vh;
   display: flex;
@@ -73,7 +69,6 @@
   color: #0f172a;
 }
 
-/* Corrige <strong> que parecían enlaces */
 .landing-info p {
   font-size: clamp(16px, 2.2vw, 18px);
   line-height: 1.7;
@@ -87,60 +82,58 @@
   text-decoration: none !important;
 }
 
-/* Si algún día hay links reales en la sección */
 .landing-info a {
   color: #1971ff;
   text-decoration: underline;
 }
 
-/* Responsive tweaks */
 @media (max-width: 768px) {
   .comenzar {
     padding: 14px 28px;
     border-radius: 999px;
     font-size: 1rem;
   }
+
   .body img {
     height: 22vh;
   }
 }
-/* ===== CONTACTO ===== */
-.contact .contact-form{
+
+.contact .contact-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.contact .contact-form .row{
+.contact .contact-form .row {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
 }
 
-.contact .contact-form .row input{
+.contact .contact-form .row input {
   flex: 1 1 240px;
   min-width: 0;
 }
 
 .contact .contact-form input,
-.contact .contact-form textarea{
+.contact .contact-form textarea {
   width: 100%;
   box-sizing: border-box;
   padding: 14px 16px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.2);
-  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, .06);
   color: #fff;
   font-size: 16px;
   outline: none;
 }
 
-.contact .contact-form textarea{ 
-  min-height: 120px; 
-  resize: vertical; 
+.contact .contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
 }
 
-.contact .contact-form .send{ 
-  align-self: center; 
+.contact .contact-form .send {
+  align-self: center;
 }
-
