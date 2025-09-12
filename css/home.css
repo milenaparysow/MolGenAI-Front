@@ -1,21 +1,39 @@
-/* Reset básico */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: "Inter", sans-serif;
+  background: #0a0f1a;
+  color: #fff;
+}
+
+/* ===== HERO ===== */
 .body {
   background-image: url("../images/pantalla_inicio.svg");
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
+
   width: 100%;
-  min-height: 100svh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  min-height: 100dvh;
+
+  display: grid;
+  place-content: center;   /* centra el grupo */
+  justify-items: center;   /* centra cada hijo */
+  text-align: center;
+
+  padding-inline: clamp(16px, 4vw, 48px);
+}
+
+.body > * {
+  margin: 0;
 }
 
 .body img {
@@ -25,21 +43,19 @@
 }
 
 .comenzar {
-  margin-top: 10vh;
+  margin-top: 2rem;
   color: #01ddff;
   background-color: transparent;
-  padding: 1.7vw 5vw;
-  border-radius: 5vw;
+  padding: 1.2rem 3rem;
+  border-radius: 50px;
   border: 3px solid #01ddff;
-  font-family: "Inter", sans-serif;
   font-weight: 900;
   text-decoration: none;
-  text-align: center;
   font-size: 1.2rem;
   box-shadow: 0 0 10px rgba(1, 221, 255, 0.5);
   transition: all 0.3s ease;
-  cursor: pointer;
   display: inline-block;
+  cursor: pointer;
 }
 
 .comenzar:hover {
@@ -49,91 +65,52 @@
   transform: scale(1.05);
 }
 
-.landing-info {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 48px 24px;
-  background: #ffffff;
-}
-
-.landing-info .container {
-  max-width: 900px;
-  text-align: center;
-}
-
-.landing-info h2 {
-  font-size: clamp(22px, 4vw, 32px);
-  margin-bottom: 12px;
-  color: #0f172a;
-}
-
-.landing-info p {
-  font-size: clamp(16px, 2.2vw, 18px);
-  line-height: 1.7;
-  color: #334155;
-}
-
-.landing-info p strong,
-.landing-info p b {
-  color: #1971ff !important;
-  font-weight: 700;
-  text-decoration: none !important;
-}
-
-.landing-info a {
-  color: #1971ff;
-  text-decoration: underline;
-}
-
 @media (max-width: 768px) {
   .comenzar {
     padding: 14px 28px;
     border-radius: 999px;
     font-size: 1rem;
   }
-
   .body img {
     height: 22vh;
   }
 }
 
-.contact .contact-form {
-  display: flex;
+.body{
+  /* centrado del bloque completo */
+  display: flex !important;
   flex-direction: column;
-  gap: 16px;
+  justify-content: center !important;  /* centro vertical */
+  align-items: center !important;       /* centro horizontal */
+  min-height: 100dvh;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  gap: clamp(12px, 6vh, 48px);          /* separa logo, título, botón, texto */
 }
 
-.contact .contact-form .row {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
+/* elimina empujes que rompen el centrado */
+.body > * { margin: 0 !important; }
+.comenzar { margin-top: 0 !important; }
 
-.contact .contact-form .row input {
-  flex: 1 1 240px;
-  min-width: 0;
+/* por si algún contenedor padre agrega padding arriba/abajo */
+section:first-child,
+.hero,
+.hero-section {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
+/* FIX FINAL: centrar hero sí o sí */
+section.body{
+  display: grid !important;
+  place-content: center !important;   /* centra el grupo */
+  justify-items: center !important;   /* centra cada hijo */
+  min-height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  background-position: 55% center !important; /* ajusta percepción con tu SVG */
+}
+section.body > *{ margin: 0 !important; }
+section.body .comenzar{ margin-top: 0 !important; }
 
-.contact .contact-form input,
-.contact .contact-form textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, .2);
-  background: rgba(255, 255, 255, .06);
-  color: #fff;
-  font-size: 16px;
-  outline: none;
-}
 
-.contact .contact-form textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-.contact .contact-form .send {
-  align-self: center;
-}

@@ -35,28 +35,67 @@
     .container { width: 100%; max-width: 1000px; margin: 0 auto; }
 
     /* hero */
-    .body { flex-direction: column; }
-    .body img { height: 30vh; max-width: 80vw; object-fit: contain; }
-    .comenzar {
-      margin-top: 5vh;
-      color: var(--brand);
-      background: transparent;
-      padding: 1.2rem 3rem;
-      border-radius: 50px;
-      border: 3px solid var(--brand);
-      font-weight: 900;
-      text-decoration: none;
-      font-size: 1.2rem;
-      box-shadow: 0 0 10px rgba(1, 221, 255, 0.5);
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-    .comenzar:hover { background: var(--brand); color: #0A0F1A; box-shadow: 0 0 20px var(--brand); transform: scale(1.05); }
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* centra vertical */
+  align-items: center;       /* centra horizontal */
+  min-height: 100dvh;        /* ocupa toda la altura de la pantalla */
+  text-align: center;        /* centra textos */
+}
 
-    .scroll-hint { margin-top: 2rem; font-size: .95rem; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: .3rem; opacity: .9; animation: fadeIn 2s ease-in-out; }
-    .arrow { font-size: 1.2rem; animation: bounce 1.5s infinite; }
-    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
-    @keyframes fadeIn { from{opacity:0; transform:translateY(10px)} to{opacity:.9; transform:translateY(0)} }
+.body img {
+  height: 30vh;
+  max-width: 80vw;
+  object-fit: contain;
+}
+
+.comenzar {
+  margin-top: 2rem; /* más natural que 5vh */
+  color: var(--brand);
+  background: transparent;
+  padding: 1.2rem 3rem;
+  border-radius: 50px;
+  border: 3px solid var(--brand);
+  font-weight: 900;
+  text-decoration: none;
+  font-size: 1.2rem;
+  box-shadow: 0 0 10px rgba(1, 221, 255, 0.5);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+.comenzar:hover {
+  background: var(--brand);
+  color: #0A0F1A;
+  box-shadow: 0 0 20px var(--brand);
+  transform: scale(1.05);
+}
+
+.scroll-hint {
+  margin-top: 2rem;
+  font-size: .95rem;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  opacity: .9;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.arrow {
+  font-size: 1.2rem;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(10px); }
+  to { opacity:.9; transform:translateY(0); }
+}
 
     /* card base (glass) */
     .card {
@@ -126,15 +165,17 @@
 <body>
 
   <!-- hero -->
-  <div class="body" id="home">
-    <img src="./images/logo.svg" alt="MolGenAI logo">
-    <!-- abre la página de generación de moléculas -->
-    <a href="moleculas.html" class="comenzar">Comenzar</a>
-    <div class="scroll-hint">
-      <span>Scrolleá para ver más</span>
-      <div class="arrow">⬇</div>
-    </div>
+   <div class="body" id="home" 
+     style="display:grid;place-content:center;justify-items:center;
+            min-height:100dvh;margin:0;padding:0;
+            background-position:55% center;">
+  <img src="./images/logo.svg" alt="MolGenAI logo">
+  <a href="moleculas.html" class="comenzar">Comenzar</a>
+  <div class="scroll-hint">
+    <span>Scrolleá para ver más</span>
+    <div class="arrow">⬇</div>
   </div>
+</div>
 
   <!-- qué es molgenai -->
   <section class="landing-info" id="about">
