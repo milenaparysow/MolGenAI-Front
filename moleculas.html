@@ -13,36 +13,35 @@
       <img src="images/logo.svg" alt="MolGen.AI" />
     </div>
     <p class="guardadas">Moléculas Guardadas</p>
-  <div class="bottom-icons">
-  <!-- Home -->
-  <a href="#">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#00e6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-      <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
-    </svg>
-  </a>
-
-  <!-- Info -->
-  <a href="#">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#00e6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="10"/>
-      <line x1="12" y1="16" x2="12" y2="12"/>
-      <line x1="12" y1="8" x2="12.01" y2="8"/>
-    </svg>
-  </a>
-</div>
+    <div class="bottom-icons">
+      <a href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#00e6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
+        </svg>
+      </a>
+      <a href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#00e6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+      </a>
+    </div>
   </nav>
 
- <main>
-  <div class="contenedor-input">
-    <h1 class="titulo">Ingrese Moléculas</h1>
-    <input class="moleculas-input" id="moleculas-input" placeholder="Escriba aquí las moléculas..." />
-  </div>
+  <main>
+    <div class="contenedor-input">
+      <h1 class="titulo">Ingrese Moléculas</h1>
+      <input class="moleculas-input" id="moleculas-input" placeholder="Escriba aquí la molécula (SMILES)..." />
+    </div>
+    <div class="div-boton">
+      <button class="btn-generar" id="generar">Generar</button>
+    </div>
+  </main>
 
-  <div class="div-boton">
-    <button class="btn-generar" id="generar">Generar</button>
-  </div>
-</main>
-<section id="respuesta" class="respuesta"></section> 
-<script type="module" src="moleculas.js"></script>
+  <section id="respuesta" class="respuesta"></section> 
+
+  <script type="module" src="./moleculas.js"></script>
 </body>
 </html>
+
