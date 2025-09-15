@@ -130,14 +130,14 @@ function randomResult(smiles) {
 const esc = (s) => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 
 function renderError(msg){
-  respuestaDiv.innerHTML = `<div class="alerta error">⚠️ ${esc(msg)}</div>`;
+  respuestaDiv.innerHTML = `<div class="alerta error"> ${esc(msg)}</div>`;
 }
 
 function renderSuccess(original, json){
   const d = json.data || {};
   respuestaDiv.innerHTML = `
     <div class="alerta exito">
-      <h3>✅ Molécula generada</h3>
+      <h3>Molécula generada correctamente</h3>
       <p><strong>SMILES original:</strong> <code>${esc(original)}</code></p>
       <p><strong>SMILES nuevo:</strong> <code>${esc(d.smiles ?? "(sin dato)")}</code></p>
       <p><strong>Peso molecular:</strong> ${esc(d.peso_molecular ?? "(?)")}</p>
