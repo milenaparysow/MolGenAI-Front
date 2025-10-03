@@ -12,6 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
+  <!-- GSAP para animaciones -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
   <style>
     :root {
       --brand: #01DDFF;
@@ -29,73 +33,85 @@
       color: var(--text);
       background: url("./images/pantalla_inicio.svg") center/cover no-repeat fixed;
     }
+    /* ===== Cursor sparkles (overlay fijo) ===== */
+#sparkle-root{
+  position: fixed; inset: 0;
+  pointer-events: none;      /* no bloquea clicks */
+  z-index: 9999;             /* por encima de todo */
+}
+
+.sparkle {
+  position: absolute;
+  width: 8px; height: 8px;
+  transform: translate(-50%, -50%) scale(1);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.6) 35%, rgba(255,255,255,0) 60%),
+    radial-gradient(circle at 50% 50%, rgba(1,221,255,.65) 0%, rgba(1,221,255,0) 70%);
+  filter: drop-shadow(0 0 8px rgba(1,221,255,.6));
+  animation: sparkle-fade .9s ease-out forwards, sparkle-move .9s ease-out forwards;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes sparkle-fade {
+  0%   { opacity: 1; filter: drop-shadow(0 0 10px rgba(1,221,255,.8)); }
+  80%  { opacity: .35; }
+  100% { opacity: 0; filter: drop-shadow(0 0 0 rgba(1,221,255,0)); }
+}
+@keyframes sparkle-move {
+  0%   { transform: translate(var(--sx,0px), var(--sy,0px)) scale(1) rotate(0deg); }
+  100% { transform: translate(calc(var(--sx,0px) + var(--dx,0px)), calc(var(--sy,0px) + var(--dy,0px))) scale(.6) rotate(var(--rot,30deg)); }
+}
+
+/* Respeta reduce motion: baja intensidad (no lo apaga) */
+@media (prefers-reduced-motion: reduce) {
+  .sparkle { animation: sparkle-fade .5s linear forwards; }
+}
+
 
     /* layout secciones */
     section, .body { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: clamp(48px, 8vw, 96px) 24px; text-align: center; }
     .container { width: 100%; max-width: 1000px; margin: 0 auto; }
 
-    /* hero */
-.body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;   /* centra vertical */
-  align-items: center;       /* centra horizontal */
-  min-height: 100dvh;        /* ocupa toda la altura de la pantalla */
-  text-align: center;        /* centra textos */
-}
+    /* ===== HERO (ARREGLADO) ===== */
+    .body{
+      display: grid; place-content: center; justify-items: center;
+      min-height: 100dvh; margin: 0; padding: 0; background-position:55% center;
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .hero-layer{ display:flex; flex-direction:column; align-items:center; gap:1.5rem; }
+    .hero-logo{ height: clamp(72px, 14vw, 160px); max-width: 85vw; object-fit: contain; }
 
-.body img {
-  height: 30vh;
-  max-width: 80vw;
-  object-fit: contain;
-}
+    .comenzar {
+      margin-top: .5rem;
+      color: var(--brand);
+      background: transparent;
+      padding: 1.05rem 2.8rem;
+      border-radius: 50px;
+      border: 3px solid var(--brand);
+      font-weight: 900;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(1, 221, 255, 0.35);
+    }
+    .comenzar:hover {
+      background: var(--brand);
+      color: #0A0F1A;
+      box-shadow: 0 0 20px var(--brand);
+      transform: translateY(-2px);
+    }
 
-.comenzar {
-  margin-top: 2rem; /* más natural que 5vh */
-  color: var(--brand);
-  background: transparent;
-  padding: 1.2rem 3rem;
-  border-radius: 50px;
-  border: 3px solid var(--brand);
-  font-weight: 900;
-  text-decoration: none;
-  font-size: 1.2rem;
-  box-shadow: 0 0 10px rgba(1, 221, 255, 0.5);
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-.comenzar:hover {
-  background: var(--brand);
-  color: #0A0F1A;
-  box-shadow: 0 0 20px var(--brand);
-  transform: scale(1.05);
-}
-
-.scroll-hint {
-  margin-top: 2rem;
-  font-size: .95rem;
-  color: var(--muted);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .3rem;
-  opacity: .9;
-  animation: fadeIn 2s ease-in-out;
-}
-
-.arrow {
-  font-size: 1.2rem;
-  animation: bounce 1.5s infinite;
-}
-
-@keyframes bounce {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(10px); }
-  to { opacity:.9; transform:translateY(0); }
-}
+    .scroll-hint {
+      margin-top: .8rem;
+      font-size: .95rem;
+      color: var(--muted);
+      display: flex; flex-direction: column; align-items: center; gap: .3rem;
+      opacity: .95;
+    }
+    .arrow { font-size: 1.2rem; animation: bounce 1.5s infinite; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
     /* card base (glass) */
     .card {
@@ -160,27 +176,30 @@
     @media (max-width: 720px) {
       form { grid-template-columns: 1fr; }
     }
+
+    /* ===== Helpers de animación (no ocultan contenido por defecto) ===== */
+    .reveal { will-change: transform, opacity, filter; }
+    .stagger > * { will-change: transform, opacity; }
   </style>
 </head>
 <body>
 
-  <!-- hero -->
-   <div class="body" id="home" 
-     style="display:grid;place-content:center;justify-items:center;
-            min-height:100dvh;margin:0;padding:0;
-            background-position:55% center;">
-  <img src="./images/logo.svg" alt="MolGenAI logo">
-  <a href="moleculas.html" class="comenzar">Comenzar</a>
-  <div class="scroll-hint">
-    <span>Scrolleá para ver más</span>
-    <div class="arrow">⬇</div>
+  <!-- HERO (MISMO CONTENIDO, ORDENADO) -->
+  <div class="body" id="home">
+    <div class="hero-layer">
+      <img src="./images/logo.svg" alt="MolGenAI logo" class="hero-logo">
+      <a href="moleculas.html" class="comenzar">Comenzar</a>
+      <div class="scroll-hint">
+        <span>Scrolleá para ver más</span>
+        <div class="arrow">⬇</div>
+      </div>
+    </div>
   </div>
-</div>
 
   <!-- qué es molgenai -->
   <section class="landing-info" id="about">
     <div class="container">
-      <div class="card">
+      <div class="card reveal">
         <h2>¿Qué es <strong>MolGenAI</strong>?</h2>
         <p>
           <strong>MolGenAI</strong> es una inteligencia artificial que, a partir de moléculas ya existentes, 
@@ -199,8 +218,8 @@
   <!-- equipo -->
   <section class="team" id="team">
     <div class="container">
-      <h2>Conocé al equipo</h2>
-      <div class="team-grid">
+      <h2 class="reveal">Conocé al equipo</h2>
+      <div class="team-grid stagger">
         <div class="member">
           <h3>Milena Parysow</h3>
           <p>Front - End</p>
@@ -236,9 +255,9 @@
   <!-- impacto/beneficios -->
   <section class="impact" id="impact">
     <div class="container">
-      <div class="card">
+      <div class="card reveal">
         <h2>¿Por qué <strong>MolGenAI</strong>?</h2>
-        <div class="grid">
+        <div class="grid stagger">
           <div class="feature">
             <h3>Más rápido</h3>
             <p>Genera moléculas en segundos para acelerar el desarrollo de nuevos fármacos.</p>
@@ -259,11 +278,11 @@
   <!-- contacto -->
   <section class="contact" id="contact">
     <div class="container">
-      <div class="card">
+      <div class="card reveal">
         <h2>Conectemos</h2>
         <p>¿Te interesa colaborar, testear o apoyar el proyecto? Escribinos.</p>
 
-        <!-- formulario -->
+        <!-- formulario (TAL CUAL ME LO DISTE) -->
         <form class="contact-form"
               action="mailto:molgenai@gmail.com"
               method="post"
@@ -279,7 +298,6 @@
   required 
   style="width:100%; box-sizing:border-box; min-height:160px; resize:vertical;">
 </textarea>
-
 
           <button type="submit" class="send">Enviar mensaje</button>
         </form>
@@ -298,5 +316,7 @@
     © <strong>MolGenAI</strong> 2025 – Marca Registrada
   </footer>
 
+  <!-- Animaciones -->
+  <script defer src="scripts.js"></script>
 </body>
 </html>
