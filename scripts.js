@@ -300,6 +300,102 @@ window.addEventListener("load", () => {
     requestAnimationFrame(() => ScrollTrigger.refresh());
   }
 })();
+// === FORM CONTACTO: animación garantizada (auto-inyecta CSS, sin romper nada) ===
+(() => {
+  // 1) CSS inline para la animación (no hace falta editar index.html)
+  const STYLE_ID = "contact-anim-inline-style";
+  if (!document.getElementById(STYLE_ID)) {
+    const st = document.createElement("style");
+    st.id = STYLE_ID;
+    st.textContent = `
+      @keyframes contactRise {
+        from { transform: translateY(22px); opacity: 0; filter: blur(4px); }
+        to   { transform: translateY(0);    opacity: 1; filter: blur(0);  }
+      }
+      ._contact_animating {
+        transition: transform var(--dur,600ms) cubic-bezier(.22,.72,.22,1) var(--delay,0ms),
+                    opacity   var(--dur,600ms) cubic-bezier(.22,.72,.22,1) var(--delay,0ms),
+                    filter    var(--dur,600ms) cubic-bezier(.22,.72,.22,1) var(--delay,0ms);
+        will-change: transform, opacity, filter;
+      }
+    `;
+    document.head.appendChild(st);
+  }
+
+  const section = document.getElementById("contact");
+  if (!section) return;
+
+  // targets en el orden exacto que querés animar
+  const targets = [
+    section.querySelector(".card"),
+    ...section.querySelectorAll("input, textarea, .send"),
+  ].filter(Boolean);
+  if (!targets.length) return;
+
+  // Función que aplica el estado inicial y anima hacia el final
+  function animateIn(el, delayMs, durMs) {
+    // Estado inicial solo si aún no fue preparado
+    if (!el._prepared) {
+      el.style.transform = "translateY(22px)";
+      el.style.opacity   = "0";
+      el.style.filter    = "blur(4px)";
+      el.classList.add("_contact_animating");
+      el._prepared = true;
+    }
+    // Seteamos duración y delay via CSS vars para no pisar tu CSS
+    el.style.setProperty("--delay", `${delayMs}ms`);
+    el.style.setProperty("--dur",   `${durMs}ms`);
+    // Siguiente frame: disparo animación a estado final
+    requestAnimationFrame(() => {
+      el.style.transform = "translateY(0)";
+      el.style.opacity   = "1";
+      el.style.filter    = "blur(0)";
+    });
+  }
+
+  // Para poder re-animar al subir/bajar
+  function reset(el) {
+    el._prepared = false;
+    el.style.removeProperty("--delay");
+    el.style.removeProperty("--dur");
+    el.style.transition = "none";
+    el.style.transform  = "";
+    el.style.opacity    = "";
+    el.style.filter     = "";
+    // Forzamos reflow para limpiar transition sin parpadeos
+    void el.offsetWidth;
+    el.classList.remove("_contact_animating");
+  }
+
+  // Observador simple con scroll: funciona en todos lados
+  function inViewport(el, offsetPx = 160) {
+    const r = el.getBoundingClientRect();
+    const h = window.innerHeight || document.documentElement.clientHeight;
+    return r.top < h - offsetPx && r.bottom > offsetPx;
+  }
+
+  function tick() {
+    const baseDurCard = 800, baseDurItem = 500, stagger = 60; // podés ajustar
+    targets.forEach((el, i) => {
+      const isCard = i === 0;
+      if (inViewport(el.closest("#contact") || el, 200)) {
+        animateIn(el, isCard ? 0 : i * stagger, isCard ? baseDurCard : baseDurItem);
+      } else {
+        // Si querés que NO re-animen al volver a entrar, comentá la línea de abajo
+        reset(el);
+      }
+    });
+  }
+
+  // Disparo en load + en scroll + en resize
+  window.addEventListener("load", tick, { once: true });
+  window.addEventListener("scroll", () => { requestAnimationFrame(tick); }, { passive: true });
+  window.addEventListener("resize", () => { requestAnimationFrame(tick); });
+
+  // Por si ya está visible al cargar:
+  requestAnimationFrame(tick);
+})();
+
 
 
 
