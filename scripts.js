@@ -5,19 +5,19 @@ window.addEventListener("load", () => {
 
   const ease = "power3.out";
 
-  // HERO: logo, botón y texto "Scrolleá…" entran suave
+  // HERO: logo, botón y texto "Scrolleá" entran suave
   gsap.from(".hero-logo",   { y: 16, scale: 0.985, opacity: 0, duration: 0.7, ease });
   gsap.from(".comenzar",    { y: 18,               opacity: 0, duration: 0.7, ease, delay: 0.08 });
   gsap.from(".scroll-hint", { y: 14,               opacity: 0, duration: 0.6, ease, delay: 0.16 });
 
-  // Scroll a “¿Qué es…?” al click en la flecha (si existe)
+  // Scroll a “¿Qué es?” al click en la flecha (si existe)
   document.querySelector(".arrow")?.addEventListener("click", () => {
     document.getElementById("about")?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   // ===== REVEALS POR SECCIÓN (sin necesidad de clases nuevas) =====
 
-  // ¿Qué es MolGenAI?
+  // Qué es MolGenAI?
   gsap.from("#about .card", {
     y: 24, opacity: 0, duration: 0.9, ease,
     scrollTrigger: { trigger: "#about .card", start: "top 80%", toggleActions: "play none none reverse" }
@@ -54,7 +54,6 @@ window.addEventListener("load", () => {
   });
 });
 
-// === Tu lógica de backend: protegida (solo corre si existen los nodos) ===
 (() => {
   const BASE_URL = "https://proyecto-25.vercel.app/all";
   const moleculasInput = document.getElementById("moleculas-input");
@@ -79,7 +78,7 @@ window.addEventListener("load", () => {
     });
   }
 })();
-// === Cursor "burbujitas" que siguen al mouse (auto-inyecta CSS) ===
+// === Cursor "burbujitas" que siguen al mouse ===
 (() => {
   const STYLE_ID = "cursor-bubbles-style";
   if (!document.getElementById(STYLE_ID)) {
@@ -111,7 +110,7 @@ window.addEventListener("load", () => {
     document.head.appendChild(style);
   }
 
-  // Overlay donde van las burbujas (no bloquea clicks)
+  // Overlay donde van las burbujas 
   let root = document.getElementById("cursor-bubbles-root");
   if (!root) {
     root = document.createElement("div");
@@ -133,7 +132,7 @@ window.addEventListener("load", () => {
 
     const dx = (Math.random() - 0.5) * (reduces ? 18 : 28);
     const dy = (Math.random() - 0.5) * (reduces ? 18 : 28);
-    const size = 20 + Math.random() * 20; // entre 12 y 24 px
+    const size = 20 + Math.random() * 20; 
 
     b.style.setProperty("--dx", dx + "px");
     b.style.setProperty("--dy", dy + "px");

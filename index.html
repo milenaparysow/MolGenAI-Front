@@ -33,7 +33,7 @@
       color: var(--text);
       background: url("./images/pantalla_inicio.svg") center/cover no-repeat fixed;
     }
-    /* ===== Cursor sparkles (overlay fijo) ===== */
+    /* ===== Cursor sparkles ===== */
 #sparkle-root{
   position: fixed; inset: 0;
   pointer-events: none;      /* no bloquea clicks */
@@ -63,7 +63,7 @@
   100% { transform: translate(calc(var(--sx,0px) + var(--dx,0px)), calc(var(--sy,0px) + var(--dy,0px))) scale(.6) rotate(var(--rot,30deg)); }
 }
 
-/* Respeta reduce motion: baja intensidad (no lo apaga) */
+/* Respeta reduce motion: baja intensidad */
 @media (prefers-reduced-motion: reduce) {
   .sparkle { animation: sparkle-fade .5s linear forwards; }
 }
@@ -73,7 +73,7 @@
     section, .body { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: clamp(48px, 8vw, 96px) 24px; text-align: center; }
     .container { width: 100%; max-width: 1000px; margin: 0 auto; }
 
-    /* ===== HERO (ARREGLADO) ===== */
+    /*  HERO  */
     .body{
       display: grid; place-content: center; justify-items: center;
       min-height: 100dvh; margin: 0; padding: 0; background-position:55% center;
@@ -177,14 +177,14 @@
       form { grid-template-columns: 1fr; }
     }
 
-    /* ===== Helpers de animación (no ocultan contenido por defecto) ===== */
+    /* Helpers de animación */
     .reveal { will-change: transform, opacity, filter; }
     .stagger > * { will-change: transform, opacity; }
   </style>
 </head>
 <body>
 
-  <!-- HERO (MISMO CONTENIDO, ORDENADO) -->
+  <!-- HERO -->
   <div class="body" id="home">
     <div class="hero-layer">
       <img src="./images/logo.svg" alt="MolGenAI logo" class="hero-logo">
@@ -282,7 +282,7 @@
         <h2>Conectemos</h2>
         <p>¿Te interesa colaborar, testear o apoyar el proyecto? Escribinos.</p>
 
-        <!-- formulario (TAL CUAL ME LO DISTE) -->
+        <!-- formulario -->
         <form class="contact-form"
               action="mailto:molgenai@gmail.com"
               method="post"
