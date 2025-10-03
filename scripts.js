@@ -300,7 +300,7 @@ window.addEventListener("load", () => {
     requestAnimationFrame(() => ScrollTrigger.refresh());
   }
 })();
-// === FORM CONTACTO: animación garantizada (auto-inyecta CSS, sin romper nada) ===
+// === FORM CONTACTO: animación esperemos q garantizada 
 (() => {
   // 1) CSS inline para la animación (no hace falta editar index.html)
   const STYLE_ID = "contact-anim-inline-style";
@@ -325,7 +325,7 @@ window.addEventListener("load", () => {
   const section = document.getElementById("contact");
   if (!section) return;
 
-  // targets en el orden exacto que querés animar
+  // targets en el orden exacto
   const targets = [
     section.querySelector(".card"),
     ...section.querySelectorAll("input, textarea, .send"),
@@ -334,7 +334,7 @@ window.addEventListener("load", () => {
 
   // Función que aplica el estado inicial y anima hacia el final
   function animateIn(el, delayMs, durMs) {
-    // Estado inicial solo si aún no fue preparado
+    // Estado inicial 
     if (!el._prepared) {
       el.style.transform = "translateY(22px)";
       el.style.opacity   = "0";
@@ -342,10 +342,10 @@ window.addEventListener("load", () => {
       el.classList.add("_contact_animating");
       el._prepared = true;
     }
-    // Seteamos duración y delay via CSS vars para no pisar tu CSS
+    // duración y delay via CSS vars para no pisar 
     el.style.setProperty("--delay", `${delayMs}ms`);
     el.style.setProperty("--dur",   `${durMs}ms`);
-    // Siguiente frame: disparo animación a estado final
+    //  disparo animación a estado final
     requestAnimationFrame(() => {
       el.style.transform = "translateY(0)";
       el.style.opacity   = "1";
@@ -353,7 +353,7 @@ window.addEventListener("load", () => {
     });
   }
 
-  // Para poder re-animar al subir/bajar
+  
   function reset(el) {
     el._prepared = false;
     el.style.removeProperty("--delay");
@@ -362,7 +362,7 @@ window.addEventListener("load", () => {
     el.style.transform  = "";
     el.style.opacity    = "";
     el.style.filter     = "";
-    // Forzamos reflow para limpiar transition sin parpadeos
+    
     void el.offsetWidth;
     el.classList.remove("_contact_animating");
   }
@@ -381,7 +381,6 @@ window.addEventListener("load", () => {
       if (inViewport(el.closest("#contact") || el, 200)) {
         animateIn(el, isCard ? 0 : i * stagger, isCard ? baseDurCard : baseDurItem);
       } else {
-        // Si querés que NO re-animen al volver a entrar, comentá la línea de abajo
         reset(el);
       }
     });
