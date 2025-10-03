@@ -33,6 +33,19 @@
       color: var(--text);
       background: url("./images/pantalla_inicio.svg") center/cover no-repeat fixed;
     }
+
+   /* Ajuste de posición para el botón "Enviar mensaje" */
+  .contact .send {
+    margin-top: 12px;     /* más cerca del textarea */
+    margin-bottom: 24px;  /* más espacio con el borde inferior */
+  }
+  /* Early reveal para evitar delay del formulario */
+  .contact .no-delay {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
     /* ===== Cursor sparkles ===== */
 #sparkle-root{
   position: fixed; inset: 0;

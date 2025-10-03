@@ -175,4 +175,132 @@ window.addEventListener("load", () => {
   window.addEventListener("mousemove", onPointerMove, { passive: true });
   window.addEventListener("touchmove", onPointerMove, { passive: true });
 })();
+// ===== Contacto: hotfix de visibilidad + animaciones robustas (no reemplaza nada) =====
+(() => {
+  // 1) Fail-safe: asegurá que el botón "Enviar" nunca quede oculto
+  const STYLE_ID = "contact-hotfix-style";
+  if (!document.getElementById(STYLE_ID)) {
+    const st = document.createElement("style");
+    st.id = STYLE_ID;
+    st.textContent = `
+      .contact .send{
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+    `;
+    document.head.appendChild(st);
+  }
+
+  // 2) Animaciones de la sección Contacto (independientes del resto)
+  function runContactAnimations() {
+    if (!window.gsap) return; // si GSAP no está, no rompemos nada
+    if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+    const ease = "power3.out";
+
+    // Card principal
+    gsap.from(".contact .card", {
+      y: 24,
+      opacity: 0,
+      duration: 0.9,
+      ease,
+      immediateRender: false, // <- evita que se oculte antes de disparar
+      scrollTrigger: window.ScrollTrigger ? {
+        trigger: ".contact .card",
+        start: "top 90%",
+        toggleActions: "play none none reverse",
+        invalidateOnRefresh: true
+      } : undefined
+    });
+
+    // Campos + botón (stagger)
+    const inputs = document.querySelectorAll(".contact input, .contact textarea, .contact .send");
+    inputs.forEach((el, i) => {
+      gsap.from(el, {
+        y: 14,
+        opacity: 0,
+        duration: 0.5,
+        ease,
+        delay: i * 0.06,
+        immediateRender: false,
+        scrollTrigger: window.ScrollTrigger ? {
+          trigger: ".contact form",
+          start: "top 92%",
+          toggleActions: "play none none reverse",
+          invalidateOnRefresh: true
+        } : undefined
+      });
+    });
+  }
+
+  // Ejecutar cuando la página está lista
+  if (document.readyState === "complete") {
+    runContactAnimations();
+  } else {
+    window.addEventListener("load", runContactAnimations);
+  }
+})();
+// === Early reveal del formulario (sin remover GSAP) ===
+(() => {
+  const targets = document.querySelectorAll(
+    ".contact .card, .contact input, .contact textarea, .contact .send"
+  );
+  if (!targets.length) return;
+
+  // Muestra los elementos ~180px antes de entrar al viewport
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add("no-delay");
+        // una vez revelado, ya no observamos más (mejor perf)
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: "180px 0px", threshold: 0.01 });
+
+  targets.forEach((el) => io.observe(el));
+})();
+// ===== Animación robusta del formulario =====
+(() => {
+  if (!window.gsap) return;
+  if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
+  document
+    .querySelectorAll(".contact .no-delay")
+    .forEach((el) => el.classList.remove("no-delay"));
+
+  const section = document.querySelector("#contact");
+  if (!section) return;
+
+  // 2) Elementos a animar
+  const card   = section.querySelector(".card");
+  const fields = section.querySelectorAll("input, textarea, .send");
+  if (!card || !fields.length) return;
+
+  // 3) Timeline por sección (enter suave, reverse al subir)
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: "power3.out" },
+    scrollTrigger: {
+      trigger: section,          // toda la sección contacto
+      start: "top 90%",          // arranca un toque antes
+      end: "bottom 60%",
+      toggleActions: "play none none reverse",
+      once: false,
+      invalidateOnRefresh: true
+      // markers: true, // <- descomentar si querés ver el trigger
+    }
+  });
+
+  // Estado inicial solo cuando entra 
+  tl.from(card, { y: 24, opacity: 0, duration: 0.8 }, 0);
+  tl.from(fields, { y: 14, opacity: 0, duration: 0.45, stagger: 0.06 }, "-=0.4");
+
+  // 4) Por si el layout cambió
+  if (window.ScrollTrigger) {
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+  }
+})();
+
+
+
 
