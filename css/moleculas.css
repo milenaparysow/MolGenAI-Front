@@ -441,3 +441,407 @@ main {
     top: 20px;
   }
 }
+/* === PORTAL flotante limpio === */
+#respuesta-portal.floating-panel {
+  position: fixed;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+#respuesta-portal .alerta {
+  pointer-events: auto;
+  background: rgba(10, 20, 30, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 230, 255, 0.3);
+  border-radius: 16px;
+  padding: 20px 28px;
+  box-shadow: 0 0 20px rgba(0, 230, 255, 0.15);
+  color: #ccfaff;
+  width: 300px;
+  animation: fadeInCard 0.4s ease-out;
+}
+
+#respuesta-portal .alerta h3 {
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #00e6ff, #7af2ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0,230,255,0.4);
+}
+
+#respuesta-portal .alerta p {
+  margin: 6px 0;
+  border-bottom: 1px solid rgba(0,230,255,0.1);
+  padding-bottom: 4px;
+}
+#respuesta-portal .alerta p:last-child {
+  border-bottom: none;
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* para móviles */
+@media (max-width: 900px) {
+  #respuesta-portal.floating-panel {
+    top: auto;
+    bottom: 20px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+  #respuesta-portal .alerta {
+    width: 85vw;
+  }
+}
+/* ===== Overlay + modal limpio ===== */
+#mg-overlay{
+  position: fixed; inset: 0;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 24px;
+  background: rgba(8,12,20,0.45);         /* oscurece */
+  backdrop-filter: blur(8px);              /* difumina fondo */
+  z-index: 10000;
+}
+#mg-overlay.show{ display: flex; animation: mgFade .18s ease-out both; }
+
+.mg-modal{
+  position: relative;
+  width: min(560px, 92vw);
+  background: rgba(14,18,26,0.9);          /* glass oscuro */
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  padding: 22px 24px;
+  color: #e8f4f8;
+}
+
+.mg-x{
+  position: absolute; top: 8px; right: 10px;
+  border: none; background: transparent; color: #9fdaf0;
+  font-size: 22px; cursor: pointer; line-height: 1;
+}
+.mg-x:hover{ transform: scale(1.06); }
+
+/* Contenido */
+.mg-card h3.mg-title{
+  margin: 0 0 10px 0;
+  color: #9ee9ff; font-weight: 700;
+}
+.mg-card p{ margin: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px; }
+.mg-card p:last-child{ border-bottom: none; }
+
+/* Loader minimal */
+.mg-loader-wrap{ display:flex; flex-direction:column; align-items:center; gap:12px; }
+.mg-loader-text{ color:#cfefff; font-size: 15px; }
+.mg-spinner{
+  width: 40px; height: 40px;
+  border: 3px solid rgba(255,255,255,0.2);
+  border-top-color: #00e6ff;
+  border-radius: 50%;
+  animation: mgSpin 0.9s linear infinite;
+}
+
+/* Animaciones */
+@keyframes mgFade { from{opacity:0} to{opacity:1} }
+@keyframes mgSpin { to{ transform: rotate(360deg) } }
+
+/* Responsive */
+@media (max-width: 680px){
+  .mg-modal{ width: 94vw; padding: 18px }
+}
+/* ===== Overlay + Modal glass ===== */
+#mg-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(10, 15, 25, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 10000;
+}
+#mg-overlay.show {
+  display: flex;
+  animation: mgFade 0.2s ease-out both;
+}
+
+/* ===== Modal principal ===== */
+.mg-modal {
+  position: relative;
+  width: min(560px, 92vw);
+  background: linear-gradient(180deg, rgba(14,18,26,0.92), rgba(10,14,20,0.9));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  padding: 26px 28px;
+  color: #eafaff;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.mg-modal::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 20px;
+  background:
+    radial-gradient(120px 60px at 85% 15%, rgba(0,230,255,0.12), transparent 70%),
+    radial-gradient(140px 120px at 10% 100%, rgba(0,230,255,0.1), transparent 70%);
+  filter: blur(16px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* ===== Botón cerrar ===== */
+.mg-x {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  color: #a8e9ff;
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+  transition: 0.15s;
+}
+.mg-x:hover {
+  transform: scale(1.1);
+  color: #c4f6ff;
+}
+
+/* ===== Texto y secciones ===== */
+.mg-card h3.mg-title {
+  margin: 0 0 14px 0;
+  font-weight: 700;
+  color: #aef0ff;
+  font-size: 1.3rem;
+}
+.mg-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px 14px;
+  align-items: center;
+}
+.mg-label {
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+.mg-value {
+  font-weight: 500;
+  font-size: 0.97rem;
+  text-align: right;
+}
+
+/* ===== Código y botón copiar ===== */
+.mg-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+.mg-copy {
+  border: none;
+  background: transparent;
+  color: #9fdaf0;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.15s;
+  padding: 2px 4px;
+}
+.mg-copy:hover {
+  color: #b9f2ff;
+  text-decoration: underline;
+}
+
+/* ===== Badges ===== */
+.mg-badges {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-size: 12px;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+}
+.badge.ok {
+  border-color: rgba(0,200,140,0.35);
+  color: #a9f5df;
+}
+.badge.warn {
+  border-color: rgba(255,180,0,0.35);
+  color: #ffe6a6;
+}
+.badge.danger {
+  border-color: rgba(255,80,80,0.35);
+  color: #ffb8b8;
+}
+
+/* ===== Separador suave ===== */
+.mg-sep {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  margin: 14px 0;
+}
+
+/* ===== Loader elegante ===== */
+.mg-loader-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.mg-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255,255,255,0.18);
+  border-top-color: #aef0ff;
+  border-radius: 50%;
+  animation: mgSpin 0.9s linear infinite;
+}
+.mg-loader-text {
+  color: #dff7ff;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.mg-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #aef0ff;
+  opacity: 0.4;
+  animation: mgDot 1.2s ease-in-out infinite;
+}
+.mg-dot:nth-child(2) { animation-delay: 0.15s; }
+.mg-dot:nth-child(3) { animation-delay: 0.3s; }
+
+/* ===== Animaciones ===== */
+@keyframes mgFade {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes mgSpin { to { transform: rotate(360deg); } }
+@keyframes mgDot {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .mg-modal {
+    width: 94vw;
+    padding: 20px;
+  }
+  .mg-grid {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+  .mg-value {
+    text-align: left;
+  }
+}
+/* ===== Loader Átomo girando ===== */
+.atom-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.atom {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  animation: spinAtom 6s linear infinite;
+}
+
+.nucleus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle at 30% 30%, #aef0ff, #00e6ff);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px rgba(0,230,255,0.6);
+}
+
+/* Órbitas */
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1.5px solid rgba(174,240,255,0.25);
+  border-radius: 50%;
+  transform-style: preserve-3d;
+}
+
+.orbit1 {
+  width: 60px;
+  height: 90px;
+  transform: translate(-50%, -50%) rotateX(65deg);
+}
+.orbit2 {
+  width: 90px;
+  height: 60px;
+  transform: translate(-50%, -50%) rotateY(65deg);
+}
+.orbit3 {
+  width: 78px;
+  height: 78px;
+  transform: translate(-50%, -50%) rotateZ(45deg);
+}
+
+/* Electrones */
+.electron {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: #aef0ff;
+  border-radius: 50%;
+  transform-origin: center 45px;
+  animation: orbitElectron 1.8s linear infinite;
+  box-shadow: 0 0 8px rgba(174,240,255,0.7);
+}
+
+.orbit2 .electron { animation-duration: 2.4s; }
+.orbit3 .electron { animation-duration: 3s; }
+
+@keyframes orbitElectron {
+  from { transform: rotate(0deg) translateX(45px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(45px) rotate(-360deg); }
+}
+
+@keyframes spinAtom {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
