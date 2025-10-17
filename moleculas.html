@@ -13,13 +13,18 @@
       <img src="images/logo.svg" alt="MolGen.AI" />
     </div>
     <p class="guardadas">Moléculas Guardadas</p>
+
+    <!-- BOTONES ACTUALIZADOS -->
     <div class="bottom-icons">
-      <a href="#">
+      <!-- 🏠 Ir a pantalla de inicio -->
+      <a href="#" id="home-btn" aria-label="Ir a inicio">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#00e6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
         </svg>
       </a>
-      <a href="#">
+
+      <!-- Lleva a la sección “Conectemos” de la landing -->
+      <a href="#" id="info-btn" aria-label="Ir a Contáctanos">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#00e6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="10"/>
           <line x1="12" y1="16" x2="12" y2="12"/>
@@ -42,5 +47,20 @@
   <section id="respuesta" class="respuesta" role="status" aria-live="polite"></section> 
 
   <script type="module" src="./moleculas.js"></script>
+
+  <!-- Script para navegación -->
+  <script>
+    // Ir a la pantalla de inicio (landing principal)
+    document.getElementById("home-btn")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = "index.html#home";
+    });
+
+    //  Ir a la sección de contacto
+    document.getElementById("info-btn")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = "index.html#contact";
+    });
+  </script>
 </body>
 </html>

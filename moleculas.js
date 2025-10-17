@@ -236,6 +236,20 @@ document.addEventListener("click", (e) => {
     btn.textContent = "copiado";
     setTimeout(() => (btn.textContent = old), 900);
   });
+  // ====== Botones inferiores ======
+
+// Home: ir a home.html (o index.html#home si preferís volver al hero)
+document.getElementById("home-btn")?.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "home.html"; // cambia a "index.html#home" si querés
+});
+
+// Info: ir directo a la sección "Contáctanos" de la landing
+document.getElementById("info-btn")?.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "index.html#contact";
+});
+
 });
 
   
