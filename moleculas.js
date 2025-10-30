@@ -201,11 +201,13 @@ boton.addEventListener("click", async () => {
   input.disabled = true;
   const start = performance.now();
   try {
-    const resp = await fetch("/api/mutar", {
+    console.log("Enviando solicitud para SMILES:", smiles);
+    const resp = await fetch("https://molgenweb-ynuo.onrender.com/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ smiles })
     });
+    console.log(resp);
     let json = null;
     try { json = await resp.json(); } catch { json = null; }
     const ok = resp.ok && json && json.ok !== false;
